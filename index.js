@@ -75,7 +75,7 @@ app.post('/parkings/:id/reservations', (req, res) => {
 });
 
 // PUT/parking/:id/reservations/:idReservation
-app.put('/parking/:id/reservations/:idReservation', (req, res) => {
+app.put('/parkings/:id/reservations/:idReservation', (req, res) => {
     const id = parseInt(req.params.id);
     const idReservation = parseInt(req.params.idReservation);
     let reservation = reservations.find(reservation => reservation.parkingId === id && reservation.id === idReservation);
@@ -89,5 +89,13 @@ app.put('/parking/:id/reservations/:idReservation', (req, res) => {
     res.status(200).json(reservation);
 });
 
+// DELETE /parking/:id/reservations/:idReservation
+app.delete('/parkings/:id/reservations/:idReservation', (req, res) => {
+    const id = parseInt(req.params.id);
+    const idReservation = parseInt(req.params.idReservation);
+    let reservation = reservations.find(reservation => reservation.parkingId === id && reservation.id === idReservation);
+    reservations.splice(reservations.indexOf(reservation), 1);
+    res.status(200).json(reservations);
+})
 
 app.listen(8080, () => {console.log('Server listening.')});
