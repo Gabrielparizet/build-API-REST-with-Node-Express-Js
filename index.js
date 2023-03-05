@@ -69,15 +69,25 @@ app.get('/parkings/:id/reservations/:idReservations', (req, res) => {
 // POST/parkings/:id/reservations
 app.post('/parkings/:id/reservations', (req, res) => {
     const id = parseInt(req.params.id);
-    reservation = reservations.find(reservation => reservation.parkingId === id);
+    let reservation = reservations.find(reservation => reservation.parkingId === id);
     reservations.push(req.body);
-    res.status(200).json(reservations);
+    res.status(200).json(reservation);
 });
 
-
-
-
-
+// PUT/parking/:id/reservations/:idReservation
+app.put('/parking/:id/reservations/:idReservation', (req, res) => {
+    const id = parseInt(req.params.id);
+    const idReservation = parseInt(req.params.idReservation);
+    let reservation = reservations.find(reservation => reservation.parkingId === id && reservation.id === idReservation);
+    reservation.parking = req.body.parking;
+    reservation.city = req.body.city;
+    reservation.clientName = req.body.clientName;
+    reservation.vehicle = req.body.vehicle;
+    reservation.licensePlate = req.body.licensePlate;
+    reservation.checkin = req.body.checkin;
+    reservation.checkout = req.body.checkout;
+    res.status(200).json(reservation);
+});
 
 
 app.listen(8080, () => {console.log('Server listening.')});
