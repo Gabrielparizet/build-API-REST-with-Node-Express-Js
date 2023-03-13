@@ -5,16 +5,16 @@ const mysql = require('mysql');
 const parkings = require('./parkings.json');
 const reservations = require('./reservations.json');
 
-// const db = mysql.createConnection({   host: "localhost",   user: "",   password: "" });
+const db = mysql.createConnection({   host: "localhost:3306",   user: "root",   password: "AllRight" });
 
-//  db.connect(function(err) {
-//        if (err) throw err;
-//        console.log("Connecté à la base de données MySQL!"); 
-// });
+ db.connect(function(err) {
+       if (err) throw err;
+       console.log("Connecté à la base de données MySQL!"); 
+});
 
-// app.get('/parkings', (req, res) => {
-//     res.send("Liste des parkings");
-// });
+app.get('/parkings', (req, res) => {
+    res.send("Liste des parkings");
+});
 
 // Middleware
 app.use(express.json());
